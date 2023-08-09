@@ -10,14 +10,15 @@ api_router = APIRouter(
 
 
 @api_router.post("/score/")
-async def getScore(file: UploadFile = File(...)):
+async def get_score(file: UploadFile = File(...)):
 
     # 클라이언트로부터 받아온 wav (15 초) 파일
     file_name = file.filename
     file_contents = await file.read()
 
     # 서버에 파일을 저장하는 모듈
-    FileController.saveFile(file_name, file_contents)
+    FileController.save_file(file_name, file_contents)
+    FileController.crop_file(file_name)
 
     # AI 모듈
 

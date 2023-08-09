@@ -6,7 +6,7 @@ from config import *
 class FileController:
 
     @staticmethod
-    def saveFile(file_name, file_contents):
+    def save_file(file_name, file_contents):
 
         server_file_path = file_directory + file_name
 
@@ -17,8 +17,11 @@ class FileController:
             temp_file_path = temp_directory + f"temp-{file_name}"
 
             FileUtil.write_file(copy_file_path, file_contents)
-            FileUtil.append_wavs(
+            FileUtil.append_wav(
                 server_file_path, copy_file_path, temp_file_path)
+
+            if os.path.exists(copy_file_path):
+                os.remove(copy_file_path)
 
         # 최초 생성이면
         else:
@@ -26,3 +29,12 @@ class FileController:
             # 파일 생성 (클라이언트의 filename 그대로 사용)
             with open(server_file_path, "wb") as buffer:
                 buffer.write(file_contents)
+
+    @staticmethod
+    def crop_file(file_name):
+
+        server_file_path = file_directory + file_name
+        temp_file_path = temp_directory + f"temp-{file_name}"
+
+        FileUtil.crop_wav(input_path=server_file_path,
+                          output_path=temp_file_path, start=2)

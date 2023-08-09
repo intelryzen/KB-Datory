@@ -1,6 +1,7 @@
 import wave
 import shutil
 import os
+from pydub import AudioSegment
 
 
 class FileUtil:
@@ -8,7 +9,7 @@ class FileUtil:
     # temp 파일을 기존 (file 디렉토리) 음성 파일에 append 함.
     # file_path1 은 기존(원본) 파일, file_path2 는 append 할 파일, output_file_path 은 합쳐진 파일이 저장되는 경로로 원본 파일에 복제 후 사라짐(즉 temp 파일).
     @staticmethod
-    def append_wavs(file_path1, file_path2, temp_file_path):
+    def append_wav(file_path1, file_path2, temp_file_path):
         # 파일들을 읽기 모드로 열기
         with wave.open(file_path1, 'rb') as w1, wave.open(file_path2, 'rb') as w2:
             # 파라미터 확인
@@ -26,11 +27,37 @@ class FileUtil:
         # 원본 파일에 복사
         shutil.move(temp_file_path, file_path1)
 
-        # 필요 없는 파일 삭제
+        # temp 파일 삭제
         if os.path.exists(temp_file_path):
             os.remove(temp_file_path)
-        if os.path.exists(file_path2):
-            os.remove(file_path2)
+            
+
+    def crop_wav(input_path, output_path, start, end=None):
+        """
+        Crops a WAV file from start to end.
+
+        Parameters:
+        - input_path: path to the input WAV file.
+        - output_path: path to save the cropped WAV file.
+        - start: start time in seconds.
+        - end: end time in seconds. If not specified, crops till the end of the file.
+        """
+
+        # Load the audio file
+        audio = AudioSegment.from_wav(input_path)
+
+        # Convert start and end from seconds to milliseconds
+        start_ms = start * 1000
+        if end is None:
+            end_ms = len(audio)
+        else:
+            end_ms = min(end * 1000, len(audio))
+
+        # Crop the audio
+        cropped_audio = audio[start_ms:end_ms]
+
+        # Export the cropped audio
+        cropped_audio.export(output_path, format="wav")
 
     @staticmethod
     def write_file(file_path, contents):
