@@ -37,4 +37,4 @@ class FileController:
         temp_file_path = temp_directory + f"temp-{file_name}"
 
         FileUtil.crop_wav(input_path=server_file_path,
-                          output_path=temp_file_path, start=2)
+                          output_path=temp_file_path, start=1, end=2)

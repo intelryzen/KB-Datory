@@ -16,3 +16,9 @@ app = FastAPI()
 app.include_router(
     api_router,
 )
+
+
+@app.on_event('startup')
+async def startup():
+    import mysql.mysql as mysql
+    mysql.initiate_db()

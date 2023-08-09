@@ -7,3 +7,6 @@ uvicorn==0.22.0
 Wave==0.0.2
 whisper==1.1.10
 pydub==0.25.1
+PyMySQL==1.1.0
+pyannote-whisper @ git+https://github.com/yinruiqing/pyannote-whisper.git
+faster_whisper==0.7.1
