@@ -30,7 +30,6 @@ class FileUtil:
         # temp 파일 삭제
         if os.path.exists(temp_file_path):
             os.remove(temp_file_path)
-            
 
     def crop_wav(input_path, output_path, start, end=None):
         """
@@ -39,19 +38,19 @@ class FileUtil:
         Parameters:
         - input_path: path to the input WAV file.
         - output_path: path to save the cropped WAV file.
-        - start: start time in seconds.
-        - end: end time in seconds. If not specified, crops till the end of the file.
+        - start: start time in milliseconds.
+        - end: end time in milliseconds. If not specified, crops till the end of the file.
         """
 
         # Load the audio file
         audio = AudioSegment.from_wav(input_path)
 
         # Convert start and end from seconds to milliseconds
-        start_ms = start * 1000
+        start_ms = start
         if end is None:
             end_ms = len(audio)
         else:
-            end_ms = min(end * 1000, len(audio))
+            end_ms = min(end, len(audio))
 
         # Crop the audio
         cropped_audio = audio[start_ms:end_ms]

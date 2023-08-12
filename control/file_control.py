@@ -31,10 +31,9 @@ class FileController:
                 buffer.write(file_contents)
 
     @staticmethod
-    def crop_file(file_name):
+    def crop_file(file_name, output_path, start, end=None):
 
         server_file_path = file_directory + file_name
-        temp_file_path = temp_directory + f"temp-{file_name}"
 
         FileUtil.crop_wav(input_path=server_file_path,
-                          output_path=temp_file_path, start=1, end=2)
+                          output_path=output_path, start=start, end=end)
