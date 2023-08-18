@@ -1,7 +1,11 @@
 # Future Finance A.I. Challenge
 
-## 프론트엔드 프레임워크: FLUTTER
 ## 백엔드 프레임워크: FASTAPI
+Github: https://github.com/intelryzen/KB-Datory
+
+## 프론트엔드 프레임워크: FLUTTER
+Github: https://github.com/intelryzen/KB-Datory-Front
+
 ## DB: MYSQL
 
 ### 클라인언트 작동 OS : Android, iOS
