@@ -50,6 +50,6 @@ class WhisperDiarization:
                 speaker = 0
                 if spk is None or "1" in spk:
                     speaker = 1
-                data = dict(start= self.last_position + round(seg.start * 1000),
-                            end= self.last_position + round(seg.end * 1000), speaker=speaker, text=sent)
+                data = dict(start=self.last_position + round(seg.start * 1000),
+                            end=self.last_position + round(seg.end * 1000), speaker=speaker, text=sent)
                 FileManager.insert_stt(file_id=self.file_id, data=data)

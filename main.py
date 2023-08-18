@@ -13,6 +13,11 @@ if not os.path.exists(temp_directory):
 
 app = FastAPI()
 
+
+@app.get("/")
+async def home():
+    return {"success": True}
+
 app.include_router(
     api_router,
 )
