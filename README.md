@@ -16,10 +16,10 @@ iOS는 통화 중 음성 녹음이 불가하므로, 실제 전화 앱과 유사�
 2. 보이스피싱으로 인지되면 서버 DB에 자동으로 해당 번호가 스팸으로 등록되어, 타 사용자에게 똑같은 번호로 전화가 오면 전화를 받기 전, <span style="color:yellow">"보이스피싱 #회 신고 접수"</span> 와 같은 문구가 표시됩니다.
 
 ### 앱 서비스 작동 사진
-<img src="https://github.com/intelryzen/KB-Datory/assets/66426612/9d6a8061-1710-42d5-826c-11168adf6f8a" width="400" height="800"/>
-![IMG_5392](https://github.com/intelryzen/KB-Datory/assets/66426612/f5de2998-eaf4-4ed1-90be-dce8233bc8a1){: width="80" height="80"}
-![IMG_5394](https://github.com/intelryzen/KB-Datory/assets/66426612/40e960aa-e822-4a7d-8f97-dc4834862355)
-![IMG_5393](https://github.com/intelryzen/KB-Datory/assets/66426612/ada8096a-3d1a-4360-b49f-9434ffc41bf3)
+<img src="https://github.com/intelryzen/KB-Datory/assets/66426612/9d6a8061-1710-42d5-826c-11168adf6f8a" width="300" height="900"/>
+<img src="https://github.com/intelryzen/KB-Datory/assets/66426612/f5de2998-eaf4-4ed1-90be-dce8233bc8a1" width="300" height="900"/>
+<img src="https://github.com/intelryzen/KB-Datory/assets/66426612/40e960aa-e822-4a7d-8f97-dc4834862355" width="300" height="900"/>
+<img src="https://github.com/intelryzen/KB-Datory/assets/66426612/ada8096a-3d1a-4360-b49f-9434ffc41bf3" width="300" height="900"/>
 
 ### 실행 전 사전 작업
 
