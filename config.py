@@ -13,6 +13,7 @@ private.py:
 
 file_directory = 'file/'
 temp_directory = 'temp/'
+pick_directory = 'pick/'
 
 class MYSQL_CONFIG:
     USER = Private.MYSQL_USER

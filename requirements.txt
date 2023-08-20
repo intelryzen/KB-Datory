@@ -10,3 +10,10 @@ pydub==0.25.1
 PyMySQL==1.1.0
 pyannote-whisper @ git+https://github.com/yinruiqing/pyannote-whisper.git
 faster_whisper==0.7.1
+# pyannote.audio @ https://github.com/pyannote/pyannote-audio/archive/refs/heads/develop.zip#sha256=a5af2b7c6ab70589a07520a4ba8aeaea8a25a9d252c64ea5b09e5c3824f3d735
+# torch==1.13.1
+# torchaudio==0.13.1
+# protobuf==3.19.6
+# pyannote.audio==2.1.1
+# pyannote.core==4.5
+# pyannote.pipeline==2.3

@@ -1,9 +1,10 @@
 import random
 from fastapi import APIRouter
 from fastapi import File, Form, UploadFile
+from control.whisper_control import WhisperDiarization
+from control.clf_control import Classifier
 from control.file_control import FileController
 from control.db_control import DbController
-from control.whisper_control import WhisperController
 from mysql.manager.spam_manager import SpamManager
 from config import *
 
@@ -12,15 +13,15 @@ api_router = APIRouter(
     tags=["API"],
 )
 
+
 # 클라이언트가 15초마다 위 api 를 요청
-
-
 @api_router.post("/score/")
 async def get_score(target_phone: str = Form(...), my_phone: str = Form(...), file: UploadFile = File(...),):
 
     # 클라이언트로부터 받아온 wav (약 15 초) 파일 읽기
     file_name = file.filename
     file_contents = await file.read()
+    pick_name = file.filename.split('.')[0] + '.pkl'
 
     # 서버에 파일을 저장하는 모듈 (서버에 파일이 이미 있다면 뒤에 이어붙이기)
     FileController.save_file(file_name, file_contents)
@@ -41,11 +42,25 @@ async def get_score(target_phone: str = Form(...), my_phone: str = Form(...), fi
     ########## 여기에 AI 모듈 실행하고 score 산출 #############
 
     # crop 한 음성파일 stt 하고 DB 에 저장
-    WhisperController.stt(last_position=last_position,
-                          file_id=file_id, file_path=crop_output_path)
+    print(file_id)
+
+    whisper_model = WhisperDiarization(
+        last_position=last_position,
+        file_id=file_id)
+    classify_model = Classifier()
+
+    # seg_list : list of dict : {speaker : int or None, start : int(s), end : int(s), text : str}
+    # updated_pickle : list of list : [seg_bucket, emb_bucket]
+
+    prev_emb = FileController.get_pickle(pick_name)
+    seg_list, updated_pickle = whisper_model.transcribe(
+        crop_output_path, prev_emb)
+
+    # 갱신된 list of emb (->pickle)을 저장
+    FileController.save_pickle(pick_name, updated_pickle)
 
     # 최종 스코어
-    score = random.randint(0, 100)
+    score = classify_model.inference(seg_list, crop_output_path)
 
     ########## 끝 #############
 
@@ -67,7 +82,7 @@ async def check_phone(target_phone: str):
     # 보이스피싱 번호이면 양수값 리턴, 아니면 0
     result = SpamManager.check_spam_phone(target_phone=target_phone)
 
-    # 보이스피싱 번호이면
+    # # 보이스피싱 번호이면
     if result >= 0:
         return dict(success=True, result=result)
 
